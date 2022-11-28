@@ -1,0 +1,47 @@
+
+choco@5892
+
+CREATE SCHEMA marketeer_database1
+CREATE TABLE marketeer_database1.Users
+ 
+CREATE TABLE marketeer_database1.Users
+(
+UserID int NOT NULL,
+PRIMARY KEY(UserID),
+FirstName varchar(255),
+LastName varchar(255),
+EMail varchar(255),
+ContactNum char(14),
+BirthDate date,
+Address varchar(255),
+UserName varchar (255),
+Password varchar (255)
+);
+ 
+select * from marketeer_database1.Users;
+INSERT INTO marketeer_database1.Users
+VALUES (1,
+'TestingFirstName',
+'TestingLastName',
+'TestingEmail',
+09914326973,
+'2000-1-01',
+'TestingAddress',
+'TestingUserName',
+'TestingPassword'
+);
+ 
+http://localhost:/marketeer/systemcheck
+ 
+http://localhost/marketeer/registerUser
+{
+	"FirstName" : "Elson",
+	"LastName" : "Galaroza",
+	"E-Mail" : "egal@jobtarget.com",
+	"ContactNumber" : "09914326860",
+	"BirthDate" : "2000-3-01",
+	"Address" : "Lapu - Lapu City",
+	"Username" : "elson_G",
+	"Password" : "e123"
+}
+
