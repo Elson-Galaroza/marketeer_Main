@@ -15,15 +15,17 @@ const [password, setPassword] = useState('');
         console.warn(username, password)
         console.log(username, password)
         let item ={username, password}
-        let result = await fetch(logInUrl,{
-        mode: "no-cors",    
-        method: 'POST',
+        let result = await fetch(
+            logInUrl,{ 
+                mode: "no-cors", 
+                method: 'POST',
                 headers:{
                     "Content-Type": "application/json",
                     "Accept": 'application/json'
                 },
                 body: JSON.stringify(item) 
-        });
+            }
+        );
         
 
         // fetch(systemCheck,{ mode: "no-cors", }).then(response=>response.json())
