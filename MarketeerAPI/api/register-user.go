@@ -28,7 +28,7 @@ func RegisterUser(c *gin.Context) {
 	errJson := c.ShouldBindJSON(&registrationPayload)
 
 	// Generate random UserID
-	UserID := rand.Intn(9999)
+	UserID := rand.Intn(10)
 	if errJson == nil {
 		genereicResponse.Status = "Successfull Input"
 		genereicResponse.Code = 200

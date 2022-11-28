@@ -16,11 +16,9 @@ export const Login = (props) => {
                     "Content-Type": "application/json",
                     "Accept": 'application/json'
                 },
-                body: JSON.stringify(username,password) 
+                body: JSON.stringify(item) 
         });
-       // result = await result.json();
-      
-        
+        result = await result.json();
 
     }
 
@@ -28,11 +26,13 @@ export const Login = (props) => {
         <div  className = "auth-form-container">
              
         <div className="col-sm-6 offset-sm-3">
-            <input type = "text" placeholder="username" onChange={(e)=>setUserName("elson_G")} className = "form-control"></input>
+            <input type = "text" placeholder="username" onChange={(e)=>setUserName(e.target.value)} className = "form-control"></input>
             <br />
-            <input type = "text" placeholder="password" onChange={(e)=>setPassword("e123")} className = "form-control"></input>
+            <input type = "text" placeholder="password" onChange={(e)=>setPassword(e.target.value)} className = "form-control"></input>
         </div>
         <button   onClick={(login)}>login</button>
+        {/* <button   onClick={(e)}>login</button> */}
+
             <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Register here if you don't have an account</button>
         </div>
     )
