@@ -9,7 +9,7 @@ import (
 	"marketeer/models"
 	"net/http"
 
-	"math/rand"
+	//"math/rand"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-sql-driver/mysql"
@@ -19,28 +19,23 @@ import (
 
 var db *sql.DB
 
-func RegisterUser(c *gin.Context) {
+var registrationPayload models.RegistrationInput
+var genereicResponse models.GenericResponse
+var retrieveResponse models.RetrieveResponse
 
-	var registrationPayload models.RegistrationInput
-	var genereicResponse models.GenericResponse
-	var retrieveResponse models.RetrieveResponse
+func RegisterUser(c *gin.Context) {
 
 	errJson := c.ShouldBindJSON(&registrationPayload)
 
-	// Generate random UserID
-	UserID := rand.Intn(10)
 	if errJson == nil {
 		genereicResponse.Status = "Successfull Input"
 		genereicResponse.Code = 200
 		genereicResponse.Message = "Hi, " + registrationPayload.FirstName + ". Your User Details are Below: "
-
 		retrieveResponse.Code = 200
 		retrieveResponse.Status = "Succesfull Retrieve"
-		retrieveResponse.ID = UserID
 		retrieveResponse.FirstName = registrationPayload.FirstName
 		retrieveResponse.LastName = registrationPayload.LastName
 		retrieveResponse.EMail = registrationPayload.EMail
-
 		retrieveResponse.ContactNum = registrationPayload.ContactNum
 		retrieveResponse.BirthDate = registrationPayload.BirthDate
 		retrieveResponse.Address = registrationPayload.Address
@@ -85,14 +80,81 @@ func RegisterUser(c *gin.Context) {
 	UserName := retrieveResponse.UserName
 	Password := retrieveResponse.Password
 
-	insertStatement := " INSERT INTO `marketeer_database1`.`Users` (`UserID`, `FirstName`, `LastName`, `EMail`, `ContactNum`, `BirthDate`, `Address`, `UserName`, `Password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); "
-	insert, err := db.Query(insertStatement, UserID, FirstName, LastName, EMail, ContactNum, BirthDate, Address, UserName, Password)
+	insertStatement := " INSERT INTO `marketeer_database1`.`Users` (  `FirstName`, `LastName`, `EMail`, `ContactNum`, `BirthDate`, `Address`, `UserName`, `Password`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?); "
+	insert, err := db.Query(insertStatement, FirstName, LastName, EMail, ContactNum, BirthDate, Address, UserName, Password)
 
 	if err != nil {
 		panic(err.Error())
 	}
 	defer insert.Close()
 	fmt.Print("Successfull Connection")
+
+	var (
+		id         int
+		firstName  string
+		lastName   string
+		eMail      string
+		contactNum string
+		birthDate  string
+		address    string
+		userName   string
+		passWord   string
+	)
+	getUserIDStatement := "SELECT * FROM marketeer_database1.Users ORDER BY UserID DESC LIMIT 1"
+
+	row := db.QueryRow(getUserIDStatement)
+	err2 := row.Scan()
+
+	if err2 != nil && err2 != sql.ErrNoRows {
+		rows, err := db.Query(getUserIDStatement)
+		for rows.Next() {
+			err := rows.Scan(&id, &firstName, &lastName, &eMail, &contactNum, &birthDate, &address, &userName, &passWord)
+			if err != nil && err != sql.ErrNoRows {
+				print("\nError\n")
+				log.Fatal(err)
+			}
+		}
+		if err == nil && err != sql.ErrNoRows {
+			println("\n", id)
+		}
+	}
+
+	idnum := id
+
+	retrieveResponse.ID = idnum + 1
+}
+
+func getUserID() {
+
+	var (
+		id         int
+		firstName  string
+		lastName   string
+		eMail      string
+		contactNum string
+		birthDate  string
+		address    string
+		userName   string
+		passWord   string
+	)
+	getUserIDStatement := "SELECT * FROM marketeer_database1.Users ORDER BY UserID DESC LIMIT 1"
+
+	row := db.QueryRow(getUserIDStatement)
+	err2 := row.Scan()
+
+	if err2 != nil && err2 != sql.ErrNoRows {
+		rows, err := db.Query(getUserIDStatement)
+		for rows.Next() {
+			err := rows.Scan(&id, &firstName, &lastName, &eMail, &contactNum, &birthDate, &address, &userName, &passWord)
+			if err != nil && err != sql.ErrNoRows {
+				print("\nError\n")
+				log.Fatal(err)
+			}
+		}
+		if err == nil && err != sql.ErrNoRows {
+			println("\n", id)
+		}
+	}
 
 }
 

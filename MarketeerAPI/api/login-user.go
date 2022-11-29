@@ -54,7 +54,7 @@ func LogInUser(c *gin.Context) {
 			err := rows.Scan(&id, &firstName, &lastName, &eMail, &contactNum, &birthDate, &address, &userName, &passWord)
 			//err := rows.Scan(&userName)
 			if err != nil && err != sql.ErrNoRows {
-				print("\nError 2\n")
+				print("\nError\n")
 				log.Fatal(err)
 			}
 		}

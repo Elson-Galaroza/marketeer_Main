@@ -4,7 +4,7 @@ type RetrieveResponse struct {
 	Code       int32 `json:"code"`
 	Status     string
 	Message    string `json:"message,omitempty"`
-	ID         int    `json:"ID"`
+	ID         int    `json:"ID,omitempty"`
 	FirstName  string `json:"FirstName"`
 	LastName   string `json:"LastName"`
 	EMail      string `json:"E-Mail"`

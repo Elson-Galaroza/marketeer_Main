@@ -32,21 +32,21 @@ export const Register = (props) => {
             <form className="register-form"  >
                  
 
-            <input type = "text" placeholder="First Name" onChange={(e)=>setFirstName(e.target.value)} className = "form-control"></input>
+            <input type = "text" placeholder="First Name" onChange={(e)=>setFirstName(e.target.value)}  ></input>
             <br />
-            <input type = "text" placeholder="Last Name" onChange={(e)=>setlastName(e.target.value)} className = "form-control"></input>
+            <input type = "text" placeholder="Last Name" onChange={(e)=>setlastName(e.target.value)}  ></input>
             <br />
-            <input type = "email" placeholder="E-Mail" onChange={(e)=>setEmail(e.target.value)} className = "form-control"></input>
+            <input type = "email" placeholder="E-Mail" onChange={(e)=>setEmail(e.target.value)}  ></input>
             <br />
-            <input type = "text" placeholder="Contact Number" onChange={(e)=>setContactNumber(e.target.value)} className = "form-control"></input>
+            <input type = "text" placeholder="Contact Number" onChange={(e)=>setContactNumber(e.target.value)}  ></input>
             <br />
-            <input type = "text" placeholder="Birth Date" onChange={(e)=>setBirthDate(e.target.value)} className = "form-control"></input>
+            <input type = "date" placeholder="Birth Date" onChange={(e)=>setBirthDate(e.target.value)}  ></input>
             <br />
-            <input type = "text" placeholder="Address" onChange={(e)=>setAddress(e.target.value)} className = "form-control"></input>
+            <input type = "text" placeholder="Address" onChange={(e)=>setAddress(e.target.value)}  ></input>
             <br />
-            <input type = "text" placeholder="username" onChange={(e)=>setUserName(e.target.value)} className = "form-control"></input>
+            <input type = "text" placeholder="username" onChange={(e)=>setUserName(e.target.value)}  ></input>
             <br />
-            <input type = "text" placeholder="password" onChange={(e)=>setPassword(e.target.value)} className = "form-control"></input>
+            <input type = "text" placeholder="password" onChange={(e)=>setPassword(e.target.value)}  ></input>
             <br />
 
         <button  onClick={(register)}>login</button> 
